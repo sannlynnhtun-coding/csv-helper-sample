@@ -1,0 +1,6 @@
+@CsvHelperSample_HostAddress = http://localhost:5265
+
+GET {{CsvHelperSample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
