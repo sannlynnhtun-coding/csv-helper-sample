@@ -12,7 +12,7 @@ var records = new List<Person>
             new Person { Id = 3, Name = "Bob Johnson", Age = 45 }
         };
 
-var csvBytes = csvService.GenerateCsv(records);
+var csvBytes = csvService.GenerateCsv<Person, PersonMap>(records);
 File.WriteAllBytes("people.csv", csvBytes);
 Console.WriteLine("CSV file generated and saved as 'people.csv'.");
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper.Configuration;
 using static Program;
 
 namespace CsvHelperSample.ConsoleApp;
@@ -31,13 +32,13 @@ public class CsvService
         return csv.GetRecords<dynamic>().ToList();
     }
 
-    public byte[] GenerateCsv(List<Person> records)
+    public byte[] GenerateCsv<T, TMap>(List<T> records) where TMap : ClassMap
     {
         using var memoryStream = new MemoryStream();
         using var writer = new StreamWriter(memoryStream);
         using var csv = _csvHelperService.GetCsvWriter(writer);
 
-        csv.Context.RegisterClassMap<PersonMap>();
+        csv.Context.RegisterClassMap<TMap>();
         csv.WriteRecords(records);
         writer.Flush();
 
